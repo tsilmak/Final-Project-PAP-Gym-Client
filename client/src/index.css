@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root,
+  .app {
+    height: 100%;
+    width: 100%;
+    font-family: "DM Sans", sans-serif;
+  }
+}
+
+.react-tel-input .form-control {
+  font-size: medium;
+  height: auto;
+  width: 100% !important;
+  margin-top: 0.25rem;
+  display: block;
+  color: #1f2937;
+}
+.react-tel-input .country-list .country-name {
+  color: #1f2937;
+}
+.light .react-tel-input .form-control {
+  background-color: purple;
+}
+
+/* Dark theme styles */
+.dark .search-box {
+  color: #1f2937;
+}
+.dark .input.search-box {
+  color: #1f2937;
+}
+.dark .react-tel-input .form-control {
+  color: #fff; /* Text color */
+  background-color: #191f45; /* Background color */
+  border-color: rgb(75, 85, 99) !important; /* Default border color */
+}
+
+/* Focus styles */
+.dark .react-tel-input .form-control:focus {
+  border-color: #ffda85; /* Secondary border color on focus */
+  box-shadow: 0 0 0 2px #ffda85; /* Optional: Add a box shadow for focus effect */
+}
+.dark .react-tel-input .flag-dropdown {
+  background-color: #191f45; /* Background color */
+  border-color: rgb(75, 85, 99);
+}
+.dark .react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+  background-color: #1f2937; /* Background color */
+}
+.dark .react-tel-input .flag-dropdown.open .selected-flag {
+  background-color: #1f2937; /* Background color */
+}
