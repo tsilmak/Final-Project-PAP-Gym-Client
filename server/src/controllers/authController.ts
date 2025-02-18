@@ -328,6 +328,15 @@ class AuthController {
       res.status(400).json({ message: "Email ou password não fornecidas." });
       return;
     }
+    if (email === "admin@gymhub.com" || email === "treinador@gymhub.com") {
+      res
+        .status(400)
+        .json({
+          message:
+            "Administradores teste, por favor faça login no painel administrativo.",
+        });
+      return;
+    }
 
     try {
       // Find the user by email
