@@ -34,126 +34,116 @@ const daysOfWeek: DayOfWeek[] = [
 ];
 
 const ScheduleTable: React.FC = () => {
-  const { data } = useGetAllClassesQuery();
+  const { data, isLoading } = useGetAllClassesQuery();
   const today = new Date();
   const currentDayName = daysOfWeek[today.getDay()];
   const [selectedDay, setSelectedDay] = useState<DayOfWeek>(currentDayName);
 
-  const getNextOccurrence = (selectedDay: DayOfWeek): Date => {
+  const getNextOccurrence = (day: DayOfWeek): Date => {
     const todayIndex = today.getDay();
-    const selectedIndex = daysOfWeek.indexOf(selectedDay);
-
-    if (todayIndex === selectedIndex) {
-      return today;
-    }
-
+    const selectedIndex = daysOfWeek.indexOf(day);
     const diff = (selectedIndex - todayIndex + 7) % 7 || 7;
     const nextDate = new Date(today);
-    nextDate.setDate(today.getDate() + diff);
-
+    nextDate.setDate(
+      today.getDate() + (todayIndex === selectedIndex ? 0 : diff)
+    );
     return nextDate;
   };
 
-  const nextDate = getNextOccurrence(selectedDay);
+  const calculateDuration = (startTime: string, endTime: string): string => {
+    const start = new Date(`2025-01-01T${startTime}:00Z`);
+    const end = new Date(`2025-01-01T${endTime}:00Z`);
+    const diffInMillis =
+      end < start
+        ? end.getTime() - start.getTime() + 24 * 60 * 60 * 1000
+        : end.getTime() - start.getTime();
 
+    const hours = Math.floor(diffInMillis / (1000 * 60 * 60));
+    const minutes = Math.floor((diffInMillis % (1000 * 60 * 60)) / (1000 * 60));
+    return `${hours}h ${minutes.toString().padStart(2, "0")}m`;
+  };
+
+  const nextDate = getNextOccurrence(selectedDay);
   const formattedNextDate = nextDate.toLocaleDateString("pt-PT", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
   });
 
-  const calculateDuration = (startTime: string, endTime: string): string => {
-    const start = new Date(`2025-01-01T${startTime}:00Z`);
-    const end = new Date(`2025-01-01T${endTime}:00Z`);
-    let diffInMillis = end.getTime() - start.getTime();
-    if (diffInMillis < 0) diffInMillis += 24 * 60 * 60 * 1000;
-
-    const hours = Math.floor(diffInMillis / (1000 * 60 * 60));
-    const minutes = Math.floor((diffInMillis % (1000 * 60 * 60)) / (1000 * 60));
-
-    return `${hours}h ${minutes}m`;
-  };
-
   const filteredClasses = (data || [])
-    .filter((cls: Class) => {
-      const classDate = new Date(cls.classDate);
-      return classDate.toDateString() === nextDate.toDateString();
-    })
-    .sort((a: Class, b: Class) => {
-      const timeA = new Date(`2025-01-01T${a.startTime}:00Z`);
-      const timeB = new Date(`2025-01-01T${b.startTime}:00Z`);
-      return timeA.getTime() - timeB.getTime();
-    });
-
-  const handleDayChange = (day: DayOfWeek) => {
-    setSelectedDay(day);
-  };
+    .filter(
+      (cls: Class) =>
+        new Date(cls.classDate).toDateString() === nextDate.toDateString()
+    )
+    .sort((a: Class, b: Class) => a.startTime.localeCompare(b.startTime));
 
   return (
     <section
       id="mapaAulas"
-      className="w-full py-8 sm:py-16 h-full bg-background-color-light dark:bg-background-color "
+      className="w-full py-24 md:py-28 min-h-screen bg-background-color-light dark:bg-background-color"
     >
-      <div className="container mx-auto px-4 mt-12">
-        <div className="text-center">
-          <h2 className="dark:text-white text-2xl sm:text-3xl font-bold mb-4 sm:mb-2">
-            Mapa de Aulas
-          </h2>
-        </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 dark:text-white">
+          Mapa de Aulas
+        </h2>
 
-        <div className="w-full flex flex-wrap justify-center items-center space-x-4 py-4">
+        {/* Day Selection */}
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
           {daysOfWeek.map((day) => (
-            <div
+            <button
               key={day}
-              role="button"
-              tabIndex={0}
-              onClick={() => handleDayChange(day)}
-              className={`px-3 py-2 sm:px-6 text-center border rounded focus:outline-none  ${
+              onClick={() => setSelectedDay(day)}
+              className={`px-3 py-2 text-sm md:text-base rounded-lg transition-colors duration-200 border border-black ${
                 selectedDay === day
-                  ? "bg-secondary-200 text-white dark:text-partial-black"
-                  : "bg-transparent hover:bg-secondary-200 dark:text-white hover:dark:text-partial-black"
+                  ? "bg-secondary-200 text-black font-bold border-black  dark:border-white"
+                  : "text-gray-700 dark:text-white dark:hover:text-black hover:font-bold dark:hover:border-gray-600 dark:border-white hover:bg-secondary-200 hover:border-black dark:hover:bg-secondary-800"
               }`}
             >
               {day}
-            </div>
+            </button>
           ))}
         </div>
 
-        <div className="mt-4 ">
-          <p className="text-center mb-4 text-lg font-semibold dark:text-white">
+        {/* Schedule Display */}
+        <div className="mt-6">
+          <p className="text-center text-lg font-semibold mb-4 dark:text-white">
             Aulas para{" "}
-            <span className="text-secondary-200 font-bold">{selectedDay}</span>{" "}
-            ({formattedNextDate})
+            <span className="text-secondary-600 dark:text-secondary-200">
+              {selectedDay} ({formattedNextDate})
+            </span>
           </p>
-          {filteredClasses.length > 0 ? (
+
+          {isLoading ? (
+            <p className="text-center dark:text-white">Carregando...</p>
+          ) : filteredClasses.length > 0 ? (
             <div className="overflow-x-auto">
-              <table className="min-w-full text-center border-collapse dark:text-partial-black">
-                <tbody>
-                  {filteredClasses.map((cls: Class, index: number) => (
-                    <tr key={index} className="bg-secondary-200">
-                      <td className="w-1/12 p-2">{cls.startTime}</td>
-                      <td className="p-3">
-                        <div
-                          className="p-2 rounded"
-                          style={{
-                            backgroundColor: cls.classType.color || "white",
-                            color: cls.classType.color ? "white" : "black",
-                          }}
-                        >
-                          <div className="font-bold">{cls.classType.name}</div>
-                          <div>{cls.location}</div>
-                        </div>
-                      </td>
-                      <td className="font-bold">
-                        {calculateDuration(cls.startTime, cls.endTime)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className="grid gap-4 md:grid-cols-[auto_1fr_auto] md:gap-2">
+                {filteredClasses.map((cls: Class, index: number) => (
+                  <React.Fragment key={index}>
+                    <div className="text-center md:text-right p-2 font-medium dark:text-white">
+                      {cls.startTime}
+                    </div>
+                    <div
+                      className="p-3 rounded-lg text-center"
+                      style={{
+                        backgroundColor: cls.classType.color || "#ffffff",
+                        color: cls.classType.color ? "#ffffff" : "#000000",
+                      }}
+                    >
+                      <div className="font-bold text-sm md:text-base">
+                        {cls.classType.name}
+                      </div>
+                      <div className="text-xs md:text-sm">{cls.location}</div>
+                    </div>
+                    <div className="text-center p-2 font-medium dark:text-white">
+                      {calculateDuration(cls.startTime, cls.endTime)}
+                    </div>
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
           ) : (
-            <p className="text-center mt-4 dark:text-white">
+            <p className="text-center text-gray-600 dark:text-gray-400">
               Nenhuma aula para este dia
             </p>
           )}

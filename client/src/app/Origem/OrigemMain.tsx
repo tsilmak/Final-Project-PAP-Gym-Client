@@ -44,7 +44,7 @@ const OrigemMain = () => {
         {/* Text Section */}
         <div className="lg:w-1/2 lg:pr-8">
           <HText>
-            <span className="text-secondary-500 dark:text-secondary-400">
+            <span className="text-secondary-600 dark:text-secondary-400">
               A nossa missão
             </span>
           </HText>
@@ -115,7 +115,7 @@ const OrigemMain = () => {
         {/* Text Section */}
         <div className="lg:w-1/2 lg:pl-8">
           <HText>
-            <span className="text-secondary-500 dark:text-secondary-400">
+            <span className="text-secondary-600 dark:text-secondary-400">
               A experiência no GymHub
             </span>
           </HText>

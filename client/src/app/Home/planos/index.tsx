@@ -8,7 +8,7 @@ const plans: GymPlan[] = [
     gymPlanId: 5,
     name: "Plano Premium",
     price: 64,
-    highlightedPlan: false,
+    isHighlightedPlan: false,
     features: [
       { feature: "Livre Trânsito" },
       { feature: "Supervisão / acompanhamento de treinos" },
@@ -25,7 +25,7 @@ const plans: GymPlan[] = [
     gymPlanId: 4,
     name: "Plano Completo",
     price: 44,
-    highlightedPlan: true,
+    isHighlightedPlan: true,
     features: [
       { feature: "Livre Trânsito" },
       { feature: "Supervisão / acompanhamento de treino" },
@@ -40,7 +40,7 @@ const plans: GymPlan[] = [
     gymPlanId: 3,
     name: "Plano Livre Acesso",
     price: 30,
-    highlightedPlan: false,
+    isHighlightedPlan: false,
     features: [
       { feature: "Livre Trânsito" },
       { feature: "Supervisão / acompanhamento de treino" },
@@ -66,19 +66,22 @@ const GymPlans = () => {
       </div>
 
       <div className="flex flex-wrap lg:flex-nowrap justify-center mx-auto px-20">
-        {plans.map((plan, index) => (
-          <GymPlanCard
-            key={index}
-            {...plan}
-            gymPlanId={plan.gymPlanId}
-            features={plan.features.map((f) => ({
-              feature: f.feature,
-              included: true,
-            }))}
-            isUserAuthenticated={false}
-            isSignatureProfilePage={false}
-          />
-        ))}
+        {plans.map((plan, index) => {
+          return (
+            <GymPlanCard
+              key={index}
+              {...plan}
+              gymPlanId={plan.gymPlanId}
+              highlightedPlan={plan.isHighlightedPlan}
+              features={plan.features.map((f) => ({
+                feature: f.feature,
+                included: true,
+              }))}
+              isUserAuthenticated={false}
+              isSignatureProfilePage={false}
+            />
+          );
+        })}
       </div>
     </section>
   );

@@ -24,7 +24,9 @@ const MaquinasOrigem = () => {
             experiência de treino superior.
           </p>
           {/* Secção: Tecnologia Utilizada */}
-          <h4 className="text-xl font-semibold mt-8">Tecnologia de Ponta</h4>
+          <h4 className="text-2xl font-semibold mt-8 mb-1 text-center">
+            Tecnologia de Ponta
+          </h4>
           <p className="mb-6">
             As máquinas da Sonder Hub são equipadas com a mais recente
             tecnologia, incluindo monitores de desempenho, conectividade
@@ -41,7 +43,7 @@ const MaquinasOrigem = () => {
               to="/equipamentos/cardio"
               className="transform transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 border border-transparent hover:border-gray-400 dark:hover:border-gray-600 rounded-lg"
             >
-              <div className="bg-gray-200 dark:bg-gray-800 flex flex-col h-full">
+              <div className="bg-neutral-200 dark:bg-gray-800 flex flex-col h-full">
                 <img
                   src={maquinaCardio01}
                   alt="Máquina 1"
@@ -63,7 +65,7 @@ const MaquinasOrigem = () => {
               to="/equipamentos/musculacao"
               className="transform transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 border border-transparent hover:border-gray-400 dark:hover:border-gray-600 rounded-lg"
             >
-              <div className="bg-gray-200 dark:bg-gray-800 flex flex-col h-full">
+              <div className="bg-neutral-200 dark:bg-gray-800 flex flex-col h-full">
                 <img
                   src={maquinaMusculacao01}
                   alt="Máquina 2"
@@ -83,7 +85,7 @@ const MaquinasOrigem = () => {
               to="/equipamentos/funcional"
               className="transform transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 border border-transparent hover:border-gray-400 dark:hover:border-gray-600 rounded-lg"
             >
-              <div className="bg-gray-200 dark:bg-gray-800 flex flex-col h-full">
+              <div className="bg-neutral-200 dark:bg-gray-800 flex flex-col h-full">
                 <img
                   src={equipamentoFuncional01}
                   alt="Máquina 3"

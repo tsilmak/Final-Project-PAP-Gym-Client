@@ -71,7 +71,7 @@ const FamiliaOrigem = () => {
           acolhedor...
         </p>
 
-        <h4 className="text-xl font-semibold mt-8">
+        <h4 className="text-2xl font-semibold mt-8 mb-2.5 text-center">
           Atividades e Eventos da Comunidade
         </h4>
         <Swiper

@@ -198,11 +198,13 @@ const Navbar = ({ isNavbarTop }: { isNavbarTop: boolean }) => {
       <div className={`${navbarBackground} fixed w-full py-6`}>
         <div className={`mx-auto w-11/12`}>
           <div className={`${flexBetween} w-full gap-8`}>
-            <img
-              alt="logo"
-              src={isDarkMode ? LogoLight : LogoDark}
-              className="h-8"
-            />
+            <Link to={"/"}>
+              <img
+                alt="logo"
+                src={isDarkMode ? LogoLight : LogoDark}
+                className="h-8"
+              />
+            </Link>
 
             {isAboveMediumScreens ? (
               <div className={`${flexBetween} w-full`}>
@@ -247,39 +249,40 @@ const Navbar = ({ isNavbarTop }: { isNavbarTop: boolean }) => {
                           </li>
                           <li>
                             <Link
-                              to="/perfil"
-                              className="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-secondary-200"
-                            >
-                              Pagamentos
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to="/perfil"
+                              to="/perfil/assinatura"
                               className="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-secondary-200"
                             >
                               Gerir Assinatura
                             </Link>
                           </li>
                           <li>
-                            <a
-                              href="#"
+                            <Link
+                              to="/perfil/pagamentos"
                               className="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-secondary-200"
                             >
-                              Agendar Aulas
-                            </a>
+                              Pagamentos
+                            </Link>
+                          </li>
+
+                          <li>
+                            <Link
+                              to="/perfil/treino"
+                              className="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-secondary-200"
+                            >
+                              Planos de Treino
+                            </Link>
                           </li>
                         </ul>
                         <div className="py-1">
-                          <a
-                            href="#"
+                          <Link
+                            to="/"
                             className="block px-4 py-2 text-sm text-red-600 hover:bg-red-200"
                             onClick={() => {
                               handleLogout();
                             }}
                           >
                             Sair
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="font-medium ">
@@ -397,7 +400,7 @@ const Navbar = ({ isNavbarTop }: { isNavbarTop: boolean }) => {
                           to="/perfil/assinatura"
                           className="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-secondary-200"
                         >
-                          Assinatura
+                          Gerir Assinatura
                         </Link>
                       </li>
                       <li>
@@ -408,17 +411,25 @@ const Navbar = ({ isNavbarTop }: { isNavbarTop: boolean }) => {
                           Pagamentos
                         </Link>
                       </li>
+                      <li>
+                        <Link
+                          to="/perfil/treino"
+                          className="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-secondary-200"
+                        >
+                          Planos de Treino
+                        </Link>
+                      </li>
                     </ul>
                     <div className="py-1">
-                      <a
-                        href="#"
+                      <Link
+                        to="/"
                         className="block px-4 py-2 text-sm text-red-600 hover:bg-red-200 rounded-md"
                         onClick={() => {
                           handleLogout();
                         }}
                       >
                         Sair
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="font-medium ">

@@ -12,9 +12,9 @@ const Funcional = () => {
     ) || [];
 
   return (
-    <div className="min-h-screen bg-background-color text-white py-28">
+    <div className="min-h-screen dark:bg-background-color text-white py-28 bg-background-color-light">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-8">
+        <h1 className="text-4xl font-bold text-center mb-8 text-partial-black dark:text-white">
           Equipamento Funcional
         </h1>
 
@@ -48,10 +48,12 @@ const Funcional = () => {
 
               {/* Content */}
               <div className="p-6">
-                <h2 className="text-2xl font-bold mb-3 text-blue-400">
+                <h2 className="text-2xl font-bold mb-3 dark:text-blue-400 text-blue-600">
                   {machine.name}
                 </h2>
-                <p className="text-gray-400">{machine.description}</p>
+                <p className="dark:text-gray-400 text-black">
+                  {machine.description}
+                </p>
               </div>
             </div>
           ))}

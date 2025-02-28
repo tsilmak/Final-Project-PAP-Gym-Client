@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,7 +11,7 @@
   .app {
     height: 100%;
     width: 100%;
-    font-family: "DM Sans", sans-serif;
+    font-family: "Ubuntu", sans-serif;
   }
 }
 
@@ -31,32 +30,22 @@
   background-color: purple;
 }
 
-/* Dark theme styles */
-.dark .search-box {
-  color: #1f2937;
-}
-.dark .input.search-box {
-  color: #1f2937;
-}
-.dark .react-tel-input .form-control {
-  color: #fff; /* Text color */
-  background-color: #191f45; /* Background color */
-  border-color: rgb(75, 85, 99) !important; /* Default border color */
+/* Scroll Bar */
+
+/* Scroll bar dark */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #1f2937;
 }
 
-/* Focus styles */
-.dark .react-tel-input .form-control:focus {
-  border-color: #ffda85; /* Secondary border color on focus */
-  box-shadow: 0 0 0 2px #ffda85; /* Optional: Add a box shadow for focus effect */
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #1f2937;
 }
-.dark .react-tel-input .flag-dropdown {
-  background-color: #191f45; /* Background color */
-  border-color: rgb(75, 85, 99);
-}
-.dark .react-tel-input .selected-flag:hover,
-.react-tel-input .selected-flag:focus {
-  background-color: #1f2937; /* Background color */
-}
-.dark .react-tel-input .flag-dropdown.open .selected-flag {
-  background-color: #1f2937; /* Background color */
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #ffda85;
 }

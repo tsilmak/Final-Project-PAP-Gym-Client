@@ -57,7 +57,7 @@ export interface GymPlan {
   features: { feature: string }[];
   price: number;
   name: string;
-  highlightedPlan: boolean;
+  isHighlightedPlan: boolean;
 }
 export interface Signature {
   signatures: {

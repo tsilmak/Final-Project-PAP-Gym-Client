@@ -67,7 +67,6 @@ const UserSidebar = () => {
         </svg>
       ),
     },
-    { text: "Aulas", path: "/perfil/aulas", icon: "👨‍🏫" },
     {
       text: "Treino",
       path: "/perfil/treino",

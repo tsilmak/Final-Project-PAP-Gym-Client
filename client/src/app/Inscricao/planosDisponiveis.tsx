@@ -68,7 +68,7 @@ const PlanosGinasio = () => {
                 key={index}
                 {...plan}
                 isUserAuthenticated={false}
-                highlightedPlan={false}
+                highlightedPlan={plan.isHighlightedPlan}
                 isSignatureProfilePage={false}
               />
             ))}
