@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { authentication, random } from "../helpers/authentication";
 import Joi from "joi";
+import jwt from "jsonwebtoken";
+import verifyJWT from "../helpers/verifyJWT";
 
 const prisma = new PrismaClient();
 
@@ -202,6 +204,26 @@ export const getSignatureFromUser = async (
   try {
     // Assuming the userId is being sent in the request body
     const { userId } = req.body;
+
+    // MANEIRA CORRETA
+    // USING GET INSTEAD OF POST USING AUTH HEADER
+    const authHeader = req.headers.authorization;
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA", authHeader);
+    const token = authHeader?.split(" ")[1]; // Extract token after "Bearer "
+    if (!token) {
+      res.status(401).json({ message: "Unauthorized: No token provided" });
+      return;
+    }
+    // Verify the JWT token
+    let decoded: any;
+    try {
+      decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET || "");
+    } catch (err) {
+      res.status(401).json({ message: "Unauthorized: Invalid token" });
+      return;
+    }
+    console.log("JWT DECODE", decoded);
+    console.log("USER ID", decoded.userId);
 
     // Fetch signature using the userId
     const userSignature = await prisma.user.findUnique({
