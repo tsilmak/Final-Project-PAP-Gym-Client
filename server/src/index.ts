@@ -64,12 +64,10 @@ app.post(
   (request, response) => {
     const event = request.body;
 
-    // Handle the event
     switch (event.type) {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
 
-        // Extract metadata, including paymentId
         const paymentId = paymentIntent.metadata?.paymentId;
         const isSubscription = paymentIntent.metadata?.isSubscription;
         console.log("", paymentIntent.metadata);
@@ -93,7 +91,6 @@ app.post(
       case "payment_intent.payment_failed":
         const paymentIntentFailed = event.data.object;
         console.log(paymentIntentFailed);
-        // Extract metadata, including paymentId
         const paymentIdFailed = paymentIntentFailed.metadata?.paymentId;
         console.log(paymentIdFailed);
 

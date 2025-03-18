@@ -11,9 +11,7 @@ const Inscricao = () => {
   const user = useAppSelector((state) => state.global.user);
   console.log(user);
 
-  // State to manage question visibility
   const [showQuestions, setShowQuestions] = useState(false);
-  // State to manage payment info visibility
   const [showPaymentInfo, setShowPaymentInfo] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -65,7 +63,7 @@ const Inscricao = () => {
           onBackWithError={handleBackToFormWithErrorMessage}
         />
       ) : showQuestions && user ? (
-        <Questions onBack={handleBackToForm} onSubmit={handleShowPaymentInfo} /> // Pass onSubmit to Questions
+        <Questions onBack={handleBackToForm} onSubmit={handleShowPaymentInfo} />
       ) : selectedPlan ? (
         <UserRegistrationForm
           onQuestions={handleShowQuestions}

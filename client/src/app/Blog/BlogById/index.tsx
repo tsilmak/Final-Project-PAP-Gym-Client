@@ -11,22 +11,18 @@ import PrimaryButton from "@/components/PrimaryButton";
 import { ArrowLeft } from "lucide-react";
 
 const BlogById = () => {
-  // Get blogId from the URL using useParams
   const { blogId } = useParams<{ blogId: string }>();
   const navigate = useNavigate();
 
-  // Type Check blog data using the blogId, passing it as an object
   const { data, isLoading } = useGetBlogByIdQuery(
     blogId ? { blogId } : { blogId: "" }
   );
 
-  //Fetch related Blogs
   const { data: relatedBlogs, isLoading: isLoadingRelatedBlogs } =
     useGetBlogByCategoryRelatedQuery(blogId || "");
   console.log(relatedBlogs?.blogs[0]);
   const [showAllAuthors, setShowAllAuthors] = useState(false);
 
-  // Toggle "See All" functionality
   const toggleAuthors = () => {
     setShowAllAuthors(!showAllAuthors);
   };

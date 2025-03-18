@@ -57,9 +57,11 @@ function App() {
         <Route
           path="/perfil/assinatura"
           element={
-            <Layout showContactForm={false}>
-              <Assinatura />
-            </Layout>
+            <ProtectedRoute>
+              <Layout showContactForm={false}>
+                <Assinatura />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route

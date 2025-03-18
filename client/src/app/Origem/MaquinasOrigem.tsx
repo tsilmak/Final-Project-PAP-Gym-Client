@@ -2,7 +2,7 @@ import HText from "@/components/HText";
 import maquinaCardio01 from "@/assets/cardio-maquina01.jpg";
 import maquinaMusculacao01 from "@/assets/musculacao-maquina01.png";
 import equipamentoFuncional01 from "@/assets/funcional-equipamento01.jpg";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 
 const MaquinasOrigem = () => {
   return (

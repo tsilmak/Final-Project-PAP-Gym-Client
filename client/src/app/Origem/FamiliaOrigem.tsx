@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation, Autoplay } from "swiper/modules"; // Import Autoplay
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import image1 from "@/assets/TreinoFuncional.jpg";
 import image2 from "@/assets/Yoga.jpg";
 import image3 from "@/assets/BikeCycling.jpg";
@@ -84,7 +84,7 @@ const FamiliaOrigem = () => {
             delay: 3000, // Time in milliseconds between slides
             disableOnInteraction: false, // Continue autoplay after user interactions
           }}
-          modules={[Pagination, Navigation, Autoplay]} // Include Autoplay module
+          modules={[Pagination, Navigation, Autoplay]}
           className="w-full max-w-3xl mx-auto mb-8"
         >
           {modalityData.map((item, index) => (

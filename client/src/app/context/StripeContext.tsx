@@ -4,7 +4,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { Appearance, loadStripe } from "@stripe/stripe-js";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 
-// Define the props for the StripeWrapper component
 interface StripeWrapperProps {
   paymentId: number;
   amountToPay: number;
@@ -59,7 +58,6 @@ export const StripeWrapper = ({
         }).unwrap();
         if (result?.clientSecret) {
           setClientSecret(result.clientSecret);
-          console.log("Client Secret:", result.clientSecret); // Add logging
         } else {
           setErrorMessage("Client secret is missing in the response.");
         }

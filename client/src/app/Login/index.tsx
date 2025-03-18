@@ -38,7 +38,7 @@ const Login = () => {
   // Handle form submission
   const onSubmit = async (data: UserFormLogin) => {
     try {
-      const result = await userLogin(data).unwrap(); // Unwrap to handle errors properly
+      const result = await userLogin(data).unwrap();
       console.log(result);
       dispatch(
         setCredetials({ accessToken: result.accessToken, user: result.user })

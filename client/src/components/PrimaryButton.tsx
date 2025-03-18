@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom"; // Import the navigation hook
+import { useNavigate } from "react-router-dom";
 
 interface PrimaryButtonProps {
   label: string;
-  navigateTo: string | null; // Allow navigateTo to be a string or null
+  navigateTo: string | null;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({ label, navigateTo }) => {
@@ -18,7 +18,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({ label, navigateTo }) => {
   return (
     <button
       className="rounded-md text-partial-black bg-secondary-400 px-10 py-2 hover:bg-secondary-500"
-      onClick={handleClick} // Call handleClick function when clicked
+      onClick={handleClick}
     >
       {label}
     </button>
